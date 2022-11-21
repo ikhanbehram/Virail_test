@@ -33,7 +33,6 @@ const SelectCreatable = ({
     }),
     placeholder: (provided) => ({
       ...provided,
-      color: "#d2d6da",
       fontSize: "14px",
       textTransform: "capitalize",
     }),
@@ -64,6 +63,10 @@ const SelectCreatable = ({
       fontSize: ".8rem",
       height: "1.rem",
     }),
+	dropdownIndicator: base => ({
+		...base,
+		display: 'none'
+	  })
   };
 
   return (

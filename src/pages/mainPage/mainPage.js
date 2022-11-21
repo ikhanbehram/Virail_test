@@ -16,10 +16,10 @@ const MainPage = () => {
         <form onSubmit={onSubmit}>
           <div className="main-search">
             <div className="departure-input">
-              <SelectCreatable label="Departure" />
+              <SelectCreatable label="Departure" placeholderText="Your Departure" />
             </div>
             <div className="arrival-input">
-              <SelectCreatable isMulti={true} label="Arrivals" />
+              <SelectCreatable isMulti={true} label="Arrivals" placeholderText="Your Arrivals" />
             </div>
             <div className="departure-date">
               <DateComponent label="Departure Date" />
