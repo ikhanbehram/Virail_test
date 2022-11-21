@@ -1,0 +1,40 @@
+* {
+	margin: 0;
+	padding: 0;
+	font-family:'Courier New', Courier, monospace;
+}
+
+section {
+	margin: 0;
+	height: 100vh;
+	width: 100%;
+	background-color: #F7A4A4;
+	background-image: url(../images/bgc.jpg);
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+
+h1 {
+	font-size: 2.25rem;
+	text-transform: capitalize;
+	text-align: left;
+	color: #ffffff;
+}
+
+label{
+	color: #ffffff;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+}
+
+.date-component {
+	display: flex;
+	flex-direction: column;
+	input {
+		background-color: #ffffff;
+		border: none;
+		padding: 0.6rem 1rem;
+		border-radius: 5px;
+	}
+}

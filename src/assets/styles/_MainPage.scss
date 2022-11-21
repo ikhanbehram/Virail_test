@@ -1,0 +1,48 @@
+.main-page-wrapper {
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  flex-direction: column;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .main-header {
+    width: 80%;
+  }
+  form {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    width: 80%;
+    height: 10rem;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0rem 1rem;
+    .main-search {
+      gap: 10px;
+      display: flex;
+      .departure-input {
+        width: 18rem;
+      }
+      .arrival-input {
+        width: 18rem;
+      }
+      .departure-date {
+        width: 18rem;
+      }
+      button {
+		padding: 0.6rem 2rem;
+		margin-top: 1rem;
+		background-color: #FF4A4A;
+		border: none;
+		color: white;
+		border-radius: 5px;
+		font-weight: 700;
+		text-transform: uppercase;
+      }
+    }
+  }
+}
