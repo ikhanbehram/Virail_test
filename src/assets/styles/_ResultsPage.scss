@@ -1,0 +1,22 @@
+.results-page-wrapper {
+  height: 100%;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  flex-direction: column;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+  .results-page-header{
+	margin-top: 1rem;
+  }
+  .results-page-searches {
+    height: 85%;
+    width: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.18);overflow-y: scroll;
+  }
+}

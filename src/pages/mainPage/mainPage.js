@@ -1,9 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import SelectCreatable from "../../components/creatableSelect";
 import DateComponent from "../../components/dateComponent";
 
 const MainPage = () => {
+	const navigate = useNavigate();
   const onSubmit = (e) => {
     e.preventDefault();
+	navigate('/results');
   };
   return (
     <section>
@@ -24,7 +27,7 @@ const MainPage = () => {
             <div className="departure-date">
               <DateComponent label="Departure Date" />
             </div>
-            <button type="submit">Submit</button>
+            <button type="submit" onClick={onSubmit}>Submit</button>
           </div>
         </form>
       </div>
