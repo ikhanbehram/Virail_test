@@ -1,11 +1,13 @@
 import axios from "axios";
 
-export const virailApiCall = async ({from, to, date}) => {
-  const { data } = await axios.get(`https://search.virail.app/api/transport/v1/${from}/${to.value}/${date}/0/1/com/en_us?currency=USD`);
-  if (data?.progress  < 100) {
-	return virailApiCall();
+export const virailApiCall = async ({ from, to, date }) => {
+  const { data } = await axios.get(
+    `https://search.virail.app/api/transport/v1/${from}/${to.value}/${date}/0/1/com/en_us?currency=USD`
+  );
+  if (data?.progress < 100) {
+    return virailApiCall({ from, to, date });
   }
-  return {arrivalsData : data.result, label: to.label};
+  return { arrivalsData: data.result, label: to.label };
 };
 
 export const autoCompleteApi = async (value) => {
@@ -14,4 +16,3 @@ export const autoCompleteApi = async (value) => {
   );
   return data;
 };
-

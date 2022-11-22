@@ -6,6 +6,7 @@ import { virailApiCall } from "../../services/service";
 const ResultsPage = () => {
   const [arrivalTickets, setArrivaltickets] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const { state } = useLocation();
   const navigate = useNavigate();
   const getArrivals = async () => {
@@ -17,19 +18,23 @@ const ResultsPage = () => {
         to: arv,
       };
     });
-   const arrivals = arrivalsMapping.map(async (arrival) => {
-      const data = await virailApiCall(arrival);
-      const cheapest = data.arrivalsData.reduce((prev, curr) =>
-        prev.priceVal < curr.priceVal ? prev : curr
-      );
-	  return {...cheapest, to: data.label};
-    });
-	 const data = await Promise.all(arrivals);
-	 setArrivaltickets(data);
+    try {
+      const arrivals = arrivalsMapping.map(async (arrival) => {
+        const data = await virailApiCall(arrival);
+        const cheapest = data.arrivalsData.reduce((prev, curr) =>
+          prev.priceVal < curr.priceVal ? prev : curr
+        );
+        return { ...cheapest, to: data.label };
+      });
+      const data = await Promise.all(arrivals);
+      setArrivaltickets(data);
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   useEffect(() => {
-    if (!state) {
+    if (!state || !state.departure || !state.departureDate || !state.arrivals) {
       return navigate("/", { replace: true });
     }
     getArrivals();
@@ -39,9 +44,14 @@ const ResultsPage = () => {
     <section>
       <div className="results-page-wrapper">
         <div className="results-page-header">
-          <h1>Results 😀</h1>
+          {!loading && !arrivalTickets.length ? (
+            <h1>No Results 😑</h1>
+          ) : (
+            <h1>Results 😀</h1>
+          )}
         </div>
-        {loading && !arrivalTickets.length ? (
+		{error && <h1>{error}</h1>}
+        {loading && !arrivalTickets.length && !error ? (
           <h3 style={{ color: "white" }}>Loading please wait...</h3>
         ) : (
           arrivalTickets.map((arrivalTicket) => {
