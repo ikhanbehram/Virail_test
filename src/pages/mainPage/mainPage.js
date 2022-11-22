@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SelectCreatable from "../../components/creatableSelect";
 import DateComponent from "../../components/dateComponent";
-import { autoCompleteApi, virailApiCall } from "../../services/service";
+import { autoCompleteApi } from "../../services/service";
 import { mapApiData } from "../../utils";
 
 const MainPage = () => {
@@ -12,27 +12,24 @@ const MainPage = () => {
   const [departureDate, setDepartureDate] = useState(null);
   const [errors, setErrors] = useState(null);
 
-  const onChangeDeparture = ({value}) => {
-	setDeparture(value);
-  }
+  const onChangeDeparture = ( value ) => {
+    setDeparture(value);
+  };
 
   const cityOptions = async (inputValue) => {
-		const {data} = await autoCompleteApi(inputValue);
-		return mapApiData(data.results);	
+    const { data } = await autoCompleteApi(inputValue);
+    return mapApiData(data.results);
   };
 
   const onSubmit = async (e) => {
     e.preventDefault();
-	if (!departure || !arrivals || !arrivals.length || !departureDate) {
-		setErrors('Looks like there is problem in form!');
-		return;
-	} else {
-		setErrors(null);
-		console.log(departure, arrivals, departureDate);
-		const callApi = await virailApiCall();
-		console.log(callApi);
-	}
-    // navigate("/results");
+    if (!departure || !arrivals || !arrivals.length || !departureDate) {
+      setErrors("Looks like there is problem in form!");
+      return;
+    } else {
+      setErrors(null);
+    }
+    navigate("/results", {state: {departure, arrivals, departureDate}} );
   };
   return (
     <section>
@@ -48,8 +45,8 @@ const MainPage = () => {
               <SelectCreatable
                 label="Departure"
                 placeholderText="Your Departure"
-				onChange={onChangeDeparture}
-				promiseOptions={cityOptions}
+                onChange={onChangeDeparture}
+                promiseOptions={cityOptions}
               />
             </div>
             <div className="arrival-input">
@@ -60,7 +57,7 @@ const MainPage = () => {
                 onChange={(arrival) => {
                   setArrivals(arrival);
                 }}
-				promiseOptions={cityOptions}
+                promiseOptions={cityOptions}
               />
             </div>
             <div className="departure-date">
@@ -76,7 +73,7 @@ const MainPage = () => {
               Submit
             </button>
           </div>
-		{errors && <span className="error-msg">{errors}</span>}
+          {errors && <span className="error-msg">{errors}</span>}
         </form>
       </div>
     </section>

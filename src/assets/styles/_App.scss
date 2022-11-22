@@ -6,7 +6,7 @@
 
 section {
   margin: 0;
-  height: 100vh;
+  min-height: 100vh;
   width: 100%;
   background-color: #f7a4a4;
   background-image: url(../images/bgc.jpg);
@@ -43,7 +43,6 @@ label {
   padding: 0 1rem;
   color: white;
   height: 4rem;
-  background: rgba(101, 251, 217, 0.3);
   box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
   backdrop-filter: blur(15.5px);
   -webkit-backdrop-filter: blur(15.5px);
