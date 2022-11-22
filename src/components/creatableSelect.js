@@ -1,4 +1,4 @@
-import CreateableSelect from "react-select/creatable";
+import AsyncSelect from "react-select/async";
 
 const SelectCreatable = ({
   isMulti,
@@ -8,6 +8,8 @@ const SelectCreatable = ({
   req,
   options,
   disabled,
+  promiseOptions,
+  ...rest
 }) => {
   const customStyles = {
     option: (provided, state) => ({
@@ -63,27 +65,28 @@ const SelectCreatable = ({
       fontSize: ".8rem",
       height: "1.rem",
     }),
-	dropdownIndicator: base => ({
-		...base,
-		display: 'none'
-	  })
+    dropdownIndicator: (base) => ({
+      ...base,
+      display: "none",
+    }),
   };
 
   return (
     <>
       <div>
-        <label>
-          {label}
-        </label>
+        <label>{label}</label>
         {req && <label>*</label>}
       </div>
-      <CreateableSelect
+      <AsyncSelect
         isMulti={isMulti}
         name={name}
         placeholder={placeholderText}
-        options={options}
         isDisabled={disabled}
         styles={customStyles}
+        cacheOptions
+        defaultOptions
+        loadOptions={promiseOptions}
+        {...rest}
       />
     </>
   );
