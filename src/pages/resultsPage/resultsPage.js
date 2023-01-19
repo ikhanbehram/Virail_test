@@ -19,15 +19,23 @@ const ResultsPage = () => {
       };
     });
     try {
-      const arrivals = arrivalsMapping.map(async (arrival) => {
-        const data = await virailApiCall(arrival);
-        const cheapest = data.arrivalsData.reduce((prev, curr) =>
-          prev.priceVal < curr.priceVal ? prev : curr
-        );
-        return { ...cheapest, to: data.label };
-      });
-      const data = await Promise.all(arrivals);
-      setArrivaltickets(data);
+		arrivalsMapping.forEach(arrival=>{
+			virailApiCall(arrival).then(data=>{
+                const cheapest = data.arrivalsData.reduce((prev, curr) =>
+                prev.priceVal < curr.priceVal ? prev : curr
+               );
+			   setArrivaltickets(prevValue=>[...prevValue,{...cheapest, to: data.label}]);
+			}).catch(e=>{})
+		})
+    //   const arrivals = arrivalsMapping.map(async (arrival) => {
+    //     const data = await virailApiCall(arrival);
+    //     const cheapest = data.arrivalsData.reduce((prev, curr) =>
+    //       prev.priceVal < curr.priceVal ? prev : curr
+    //     );
+    //     return { ...cheapest, to: data.label };
+    //   });
+    //   const data = await Promise.all(arrivals);
+    //   setArrivaltickets(data);
     } catch (err) {
       setError(err.message);
     }
